@@ -5,7 +5,7 @@
   gather_facts: true
 
   tasks:
-    - name Ensure basic packages are installed
+    - name: Ensure basic packages are installed
       ansible.builtin.apt:
         name:
           - curl
