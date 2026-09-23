@@ -9,7 +9,7 @@ nginx_server_name: _
 
 devops_lab_environment: prod
 
-devops_lab_page_title: DevOps Lab
+devops_lab_page_title: DevOps Automation Lab
 
 base_packages:
   - curl
