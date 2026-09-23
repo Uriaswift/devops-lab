@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ devops_lab_page_title }}</title>
+</head>
+<body>
+    <h1>{{ devops_lab_page_title }}</h1>
+
+    <p>Managed by Ansible</p>
+
+    <ul>
+        <li>Host: {{ inventory_hostname }}</li>
+        <li>Description: {{ devops_lab_host_description }}</li>
+        <li>Environment: {{ devops_lab_environment }}</li>
+        <li>OS: {{ ansible_distribution }} {{ ansible_distribution_version }}</li>
+        <li>Kernel: {{ ansible_kernel }}</li>
+        <li>Architecture: {{ ansible_architecture }}</li>
+        <li>vCPU: {{ ansible_processor_vcpus }}</li>
+        <li>Memory: {{ ansible_memtotal_mb }} MB</li>
+    </ul>
+</body>
+</html>

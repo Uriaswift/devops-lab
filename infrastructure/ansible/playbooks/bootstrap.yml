@@ -7,12 +7,6 @@
   tasks:
     - name: Ensure basic packages are installed
       ansible.builtin.apt:
-        name:
-          - curl
-          - wget
-          - git
-          - htop
-          - tree
-          - lsof
+        name: "{{ base_packages }}"
         state: present
         update_cache: true
