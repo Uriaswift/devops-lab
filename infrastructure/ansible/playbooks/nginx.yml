@@ -11,14 +11,21 @@
         msg: "This plabook currently supports Debian only"
       when: ansible_distribution != "Debian"
 
-    - name: Ensure DevOps Lab directories exists
+    - name: Ensure DevOps Lab data directory exists
       ansible.builtin.file:
-        path: "{{ item.path }}"
+        path: /var/local/devops-lab
         state: directory
-        owner: "{{ item.owner }}"
-        group: "{{ item.group }}"
-        mode: "{{ item.mode }}"
-      loop: "{{ devops_lab_directories }}"  
+        owner: root
+        group: root
+        mode: "0755"
+
+    - name: Ensure DevOps Lab log directory exists
+      ansible.builtin.file:
+        path: /var/log/devops-lab
+        state: directory
+        owner: root
+        group: root
+        mode: "0755"
 
     - name: Ensure Nginx package is installed
       ansible.builtin.apt:
