@@ -75,6 +75,13 @@
         state: started
         enabled: true
 
+    - name: Allow HTTP through UFW
+      community.general.ufw:
+        rule: allow
+        port: "{{ nginx_listen_port }}"
+        proto: tcp
+
+
   handlers:
     - name: Reload Nginx
       ansible.builtin.service:
