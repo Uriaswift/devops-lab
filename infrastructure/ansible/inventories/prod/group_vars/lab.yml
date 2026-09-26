@@ -1,14 +1,5 @@
 ---
-nginx_package_name: nginx
-
-nginx_service_name: nginx
-
-nginx_listen_port: 80
-
-nginx_server_name: _
-
 devops_lab_environment: prod
-
 devops_lab_page_title: DevOps Automation Lab
 
 base_packages:

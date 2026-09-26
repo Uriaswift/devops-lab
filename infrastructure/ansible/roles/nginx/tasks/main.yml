@@ -1,0 +1,57 @@
+
+---
+- name: Ensure Nginx is installed
+  ansible.builtin.apt:
+    name: "{{ nginx_package_name }}"
+    state: present
+    update_cache: true
+    cache_valid_time: 3600
+
+- name: Create document root
+  ansible.builtin.file:
+    path: /var/www/devops-lab
+    state: directory
+    owner: www-data
+    group: www-data
+    mode: "0755"
+
+- name: Deploy index page
+  ansible.builtin.template:
+    src: index.html.j2
+    dest: /var/www/devops-lab/index.html
+    owner: www-data
+    group: www-data
+    mode: "0644"
+
+- name: Deploy Nginx configuration
+  ansible.builtin.template:
+    src: devops-lab.conf.j2
+    dest: /etc/nginx/sites-available/devops-lab.conf
+    owner: root
+    group: root
+    mode: "0644"
+  notify: Reload Nginx
+
+- name: Enable virtual host
+  ansible.builtin.file:
+    src: /etc/nginx/sites-available/devops-lab.conf
+    dest: /etc/nginx/sites-enabled/devops-lab.conf
+    state: link
+  notify: Reload Nginx
+
+- name: Disable default site
+  ansible.builtin.file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+  notify: Reload Nginx
+
+- name: Validate Nginx configuration
+  ansible.builtin.command:
+    cmd: nginx -t
+  changed_when: false
+
+- name: Ensure Nginx is running
+  ansible.builtin.service:
+    name: "{{ nginx_service_name }}"
+    state: started
+    enabled: true
