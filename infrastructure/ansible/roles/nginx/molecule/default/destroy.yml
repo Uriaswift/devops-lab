@@ -1,0 +1,16 @@
+---
+- name: Destroy
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  # no_log: "{{ molecule_no_log }}"
+  tasks:
+    # Developer must implement.
+
+    # Mandatory configuration for Molecule to function.
+
+    - name: Remove molecule container
+      community.docker.docker_container:
+        name: debian12
+        state: absent
+        force_kill: true

@@ -1,0 +1,14 @@
+---
+- name: Test ansible vault
+  hosts: lab
+  gather_facts: false
+
+  tasks:
+    - name: Verify that encrypted variable is avaible
+      ansible.builtin.assert:
+        that:
+          - devops_lab_api_token is defined
+          - devops_lab_api_token | length > 0
+        fail_msg: Vault secret is unavailable
+        success_msg: Vault secret was decrypted successfully
+      no_log: true
