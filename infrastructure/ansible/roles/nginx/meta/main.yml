@@ -1,0 +1,14 @@
+---
+galaxy_info:
+  role_name: nginx
+  namespace: uriaswift
+  author: uriaswift
+  description: Nginx role for DevOps
+  min_ansible_version: "2.14"
+
+  platforms:
+    - name: Debian
+      versions:
+        - bookworm
+
+dependencies: []

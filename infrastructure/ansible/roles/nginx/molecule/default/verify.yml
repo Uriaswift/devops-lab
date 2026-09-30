@@ -1,0 +1,35 @@
+---
+# Purpose: assert that the instance really ended up in the expected state.
+# Molecule calls this playbook with `molecule verify`.
+- name: Verify
+  hosts: all
+  gather_facts: false # Quicker, if you do not need facts
+
+  tasks:
+    - name: Check nginx configuration
+      ansible.builtin.command:
+        cmd: nginx -t
+      changed_when: false
+
+    - name: Check nginx service
+      ansible.builtin.command:
+        cmd: systemctl is-active nginx
+      register: nginx_status
+      changed_when: false
+
+    - name: Verify nginx is active
+      ansible.builtin.assert:
+        that:
+          - nginx_status.stdout == "active"
+
+    - name: Request homepage
+      ansible.builtin.uri:
+       url: http://127.0.0.1
+       return_content: true
+       status_code: 200
+      register: homepage
+
+    - name: Verify homepage content
+      ansible.builtin.assert:
+        that:
+          - "'DevOps Lab' in homepage.content"
