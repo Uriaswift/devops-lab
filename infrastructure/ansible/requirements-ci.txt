@@ -1,0 +1,5 @@
+ansible-core==2.19.13
+molecule==26.9.0
+molecule-plugins[docker]==26.9.28
+ansible-lint
+docker

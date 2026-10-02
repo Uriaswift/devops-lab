@@ -3,7 +3,8 @@ galaxy_info:
   role_name: nginx
   namespace: uriaswift
   author: uriaswift
-  description: Nginx role for DevOps
+  description: Install and configure Nginx for DevOps Lab
+  license: MIT
   min_ansible_version: "2.14"
 
   platforms:

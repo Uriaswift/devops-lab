@@ -4,6 +4,7 @@ nginx_service_name: nginx
 nginx_listen_port: 80
 nginx_server_name: _
 
-devops_lab_page_title: DevOps Lab
-devops_lab_environment: lab
-devops_lab_host_description: Ansible-managed host
+nginx_page_title: DevOps Lab
+nginx_environment: lab
+nginx_description: Ansible-managed host
+nginx_host_description: "{{ nginx_description }}"

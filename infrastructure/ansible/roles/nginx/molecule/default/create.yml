@@ -3,9 +3,7 @@
   hosts: localhost
   connection: local
   gather_facts: false
-  # no_log: "{{ molecule_no_log }}"
   tasks:
-    # TODO: Developer must implement and populate 'server' variable
 
     - name: Create molecule container
       community.docker.docker_container:
@@ -17,7 +15,7 @@
         command: /lib/systemd/systemd
         volumes:
           - /sys/fs/cgroup:/sys/fs/cgroup:rw
-      register: server
+      register: nginx_server
 
     - name: Write Molecule instance config
       ansible.builtin.copy:

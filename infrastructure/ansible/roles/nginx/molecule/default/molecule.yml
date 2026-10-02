@@ -14,7 +14,7 @@ platforms:
 provisioner:
   name: ansible
   env:
-    ANSIBLE_ROLES_PATH: "/opt/devops-lab/infrastructure/ansible/roles:${MOLECULE_PROJECT_DIRECTORY}"
+    ANSIBLE_ROLES_PATH: "${MOLECULE_PROJECT_DIRECTORY}/.."
 
 verifier:
   name: ansible
