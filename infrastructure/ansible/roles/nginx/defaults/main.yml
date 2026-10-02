@@ -7,3 +7,4 @@ nginx_server_name: _
 nginx_page_title: DevOps Lab
 nginx_environment: lab
 nginx_description: Ansible-managed host
+nginx_host_description: "{{ nginx_description }}"
