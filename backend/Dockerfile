@@ -2,14 +2,14 @@ FROM eclipse-temurin:17-jdk AS build
 WORKDIR /app
 
 COPY .mvn/ .mvn/
-COPY mvnw pom.xml
+COPY mvnw pom.xml ./
 
 RUN chmod +x mvnw
 RUN ./mvnw dependency:go-offline
 
 COPY src/ src/
 
-RUN ./mcnw clean package -DskipTests
+RUN ./mvnw clean package -DskipTests
 
 FROM eclipse-temurin:17-jre
 
@@ -23,4 +23,4 @@ USER spring
 
 EXPOSE 8080
 
-ENTRYPOINT ["java", "-jar", "/app/appjar"]
+ENTRYPOINT ["java", "-jar", "/app/app.jar"]
