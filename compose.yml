@@ -6,7 +6,19 @@ services:
 
     container_name: devops-lab-backend
 
-    ports:
-      - "8080:8080"
+    restart: unless-stopped
 
-    restart: unless-stopped    
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+
+    container_name: devops-lab-frontend
+
+    ports:
+      - "80:80"
+
+    depends_on:
+      - backend
+
+    restart: unless-stopped
