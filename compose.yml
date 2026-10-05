@@ -1,10 +1,42 @@
 services:
+  postgres:
+    image: postgres:16-alpine
+
+    container_name: devops-lab-postgres
+
+    environment:
+      POSTGRES_USER: devopslab
+      POSTGRES_PASSWORD: devopslab
+      POSTGRES_DB: devopslab
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -U devopslab -d devopslab
+      interval: 5s  
+      timeout: 3s
+      retries: 10  
+
+    restart: unless-stopped
+
   backend:
     build:
       context: ./backend
       dockerfile: Dockerfile
 
     container_name: devops-lab-backend
+
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/devopslab
+      SPRING_DATASOURCE_USERNAME: devopslab
+      SPRING_DATASOURCE_PASSWORD: devopslab
+
+    depends_on:
+      postgres:
+        condition: service_healthy
 
     healthcheck:
       test:
@@ -35,3 +67,6 @@ services:
         condition: service_healthy
 
     restart: unless-stopped
+
+volumes:
+  postgres_data:    
